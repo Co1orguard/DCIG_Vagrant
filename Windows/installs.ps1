@@ -61,10 +61,10 @@ Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Se
 # rm -Force C:/aeacus/windows.zip
 
 
-C:/aeacus/aeacus.exe --yes release
+# C:/aeacus/aeacus.exe --yes release
 
 # rm -Force C:/aeacus/aeacus.exe
 
-shutdown.exe /f /r
+# shutdown.exe /f /r
 
 
