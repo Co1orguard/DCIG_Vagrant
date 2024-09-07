@@ -53,20 +53,17 @@ Set-Service -StartupType Disabled -Name 'wuauserv'
 Stop-Service -Name 'wuauserv'
 
 
-# disable defender
-Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' -Name "DisableAntiSpyware" -Value 1
-
 # disable RDP
 Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services' -Name "fDenyTSConnections" -Value 1
 
 
-rm -Recurse -Force C:/aeacus/windows
-rm -Force C:/aeacus/windows.zip
+# rm -Recurse -Force C:/aeacus/windows
+# rm -Force C:/aeacus/windows.zip
 
 
 C:/aeacus/aeacus.exe --yes release
 
-rm -Force C:/aeacus/aeacus.exe
+# rm -Force C:/aeacus/aeacus.exe
 
 shutdown.exe /f /r
 
