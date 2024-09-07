@@ -59,9 +59,9 @@ Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Se
 
 # rm -Recurse -Force C:/aeacus/windows
 # rm -Force C:/aeacus/windows.zip
+rm -Force C:/aeacus/assets/fonts/Raleway/static/Raleway-Thin.ttf
 
-
-# C:/aeacus/aeacus.exe --yes release
+C:/aeacus/aeacus.exe --verbose --yes release
 
 # rm -Force C:/aeacus/aeacus.exe
 
