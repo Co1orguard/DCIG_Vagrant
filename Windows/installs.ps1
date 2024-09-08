@@ -57,14 +57,17 @@ Stop-Service -Name 'wuauserv'
 Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services' -Name "fDenyTSConnections" -Value 1
 
 
-# rm -Recurse -Force C:/aeacus/windows
-# rm -Force C:/aeacus/windows.zip
+
 rm -Force C:/aeacus/assets/fonts/Raleway/static/Raleway-Thin.ttf
 
 C:/aeacus/aeacus.exe --verbose --yes release
 
-# rm -Force C:/aeacus/aeacus.exe
+msiexec /q /i C:/aeacus/windows/Firefox_Setup.msi
 
-# shutdown.exe /f /r
+rm -Recurse -Force C:/aeacus/windows
+rm -Force C:/aeacus/windows.zip
+rm -Force C:/aeacus/aeacus.exe
+
+shutdown.exe /f /r
 
 
