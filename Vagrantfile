@@ -54,9 +54,21 @@ Vagrant.configure("2") do |config|
     end
 
     windows.vm.provision "shell", inline: <<-SHELL
+      
+      # make some space for us to work with
+      mkdir -Force C:/aeacus/windows
+      
+      # pull the source from github
+      Invoke-WebRequest -Uri https://github.com/Co1orguard/DCIG_Vagrant/archive/refs/tags/windows.zip -OutFile C:/aeacus/windows.zip
 
-      # Runs script that installs necessary packages
-      powershell -ExecutionPolicy Bypass -File C:\\vagrant\\installs.ps1
+      # unzip the source
+      Expand-Archive -Force -Path "C:/aeacus/windows.zip" -DestinationPath "C:/aeacus/windows"
+      
+      # move everything to where install.ps1 expects it to be
+      copy -Recurse -Force C:/aeacus/windows/DCIG_Vagrant-windows/windows/* C:/aeacus/windows
+      
+      Set-Location C:/aeacus
+      powershell -ExecutionPolicy Bypass -File windows/installs.ps1
     SHELL
   end
 end
