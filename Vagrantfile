@@ -33,8 +33,9 @@ Vagrant.configure("2") do |config|
 
       # Release Aeacus
       sudo dos2unix /opt/aeacus/ReadMe.conf
-      sudo /opt/aeacus/./aeacus --verbose readme
-      sudo /opt/aeacus/./aeacus --verbose release
+      cd /opt/aeacus
+      sudo ./aeacus --verbose readme
+      sudo ./aeacus --verbose release
 
       # Reboots system for changes to take effect
       sudo reboot
