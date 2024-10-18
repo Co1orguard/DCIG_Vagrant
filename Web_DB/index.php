@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
 
 $db = new SQLite3('usersdb.sqlite');
 
@@ -9,8 +14,12 @@ if (isset($_POST['login'])) {
 	$query = "SELECT * FROM tblUsers WHERE username = '$username' AND password = '$password'";
 	$result = $db->query($query);
 
-	if ($row = $result->fetchArray()) {
-		echo "Welcome, " . $row['username'] . "!";
+	if ($result && $row = $result->fetchArray(SQLITE3_ASSOC)) {
+		$_SESSION['user'] = $row;
+		echo "Login successful, redirecting";
+
+		header("Location: profile.php");
+		exit();
 	} else {
 		echo "Invalid creds!";
 	}
@@ -35,17 +44,25 @@ if (isset($_FILES['file'])) {
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title> Vulnerable PHP App</title>
 <head>
 <body>
 	<h1>Vulnerable PHP Web Application</h1>
 
 	<h2>Login</h2>
-	<form method="POST">
-		Username: <input type="text" name="username"><br>
-		Password: <input type="text" name="password"><br>
+	<form method="POST" action="index.php">
+		<label for="username">Username:</label>
+		<input type="text" name="username" id="username" required><br>
+
+		<label for="password">Password:</label>
+		<input type="password" name="password" id="password" required><br>
+
+
 		<input type="submit" name="login" value="Login">
 	<form>
 
