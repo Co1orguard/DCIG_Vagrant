@@ -64,7 +64,7 @@ if (isset($_FILES['file'])) {
 
 
 		<input type="submit" name="login" value="Login">
-	<form>
+	</form>
 
 
 	<h2>Upload File</h2>
