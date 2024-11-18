@@ -58,17 +58,21 @@ Vagrant.configure("2") do |config|
       # make some space for us to work with
       mkdir -Force C:/aeacus/windows
       
-      # pull the source from github
-      Invoke-WebRequest -Uri https://github.com/Co1orguard/DCIG_Vagrant/archive/refs/tags/windows.zip -OutFile C:/aeacus/windows.zip
-
-      # unzip the source
-      Expand-Archive -Force -Path "C:/aeacus/windows.zip" -DestinationPath "C:/aeacus/windows"
-      
-      # move everything to where install.ps1 expects it to be
-      copy -Recurse -Force C:/aeacus/windows/DCIG_Vagrant-windows/windows/* C:/aeacus/windows
+      # pull the setup executable for git
+      Start-BitsTransfer -Source https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe -Destination C:/Users/vagrant/Documents/Git_Setup.exe
+        
+      C:/Users/vagrant/Documents/Git_Setup.exe /VERYSILENT
+      Start-Sleep -Seconds 60
+      rm -Force C:/Users/vagrant/Documents/Git_Setup.exe
+      dir "C:/Program Files/"
       
       Set-Location C:/aeacus
+      & "C:/Program Files/Git/bin/git.exe" clone https://github.com/Co1orguard/DCIG_Vagrant.git
+      # unzip the source
+      copy -Recurse -Force C:/aeacus/DCIG_Vagrant/Windows/* C:/aeacus/windows
+      
       powershell -ExecutionPolicy Bypass -File windows/installs.ps1
+
     SHELL
   end
 end
